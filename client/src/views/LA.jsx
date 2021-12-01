@@ -69,7 +69,7 @@ const GoogleMap = ({ placeName }) => {
     }
   });
 
-const CreateCrimeNamesArray = (response) => { 
+const CreateCrimeNamesArray = (response) => { // menuCrimes is the variable that fills the drop down menu with crime names.
   console.log("in all crime data");
       for(var i = 0; i < 1000; i++){
         if(allCrimeNames.includes(response.data[i].crm_cd_desc) ){
@@ -81,7 +81,7 @@ const CreateCrimeNamesArray = (response) => {
       }
 }
 
-  const AllCrimeData = () => { //creates array containing all crime names
+  const AllCrimeData = () => { //creates array containing all crime names from api of each city
     axios.get("https://data.lacity.org/resource/2nrs-mtv8.json?")
   .then(response => { 
     CreateCrimeNamesArray(response);
@@ -93,7 +93,7 @@ const CreateCrimeNamesArray = (response) => {
 
 
 
-  const SpecificCrime = (e) => {
+  const SpecificCrime = (e) => { // this function searches the api for the desired crime
     e.preventDefault();
     console.log('in specific crime function')
     axios.get(` https://data.lacity.org/resource/2nrs-mtv8.json?crm_cd_desc=${crimeSearch}&$limit=10`)
@@ -119,7 +119,7 @@ const CreateCrimeNamesArray = (response) => {
   const [markerList, setMarkerList] = useState ([{ lat: 34.0433, lng: -118.2377, icon: iconList.icon1 }]);
   
 
-  const processCrime = (crime) => {
+  const processCrime = (crime) => { // this function processes the data from the api of the searched crime to display on the map
     const copy = [...markerList]
     for (let incident of crime){
       var lat = incident.lat;
